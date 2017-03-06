@@ -47,7 +47,7 @@ class IcingaStatusController extends Controller
                 icss.current_state AS current_state,
                 CASE
                     WHEN icss.current_state > 0 AND ichs.current_state > 0 THEN 1
-                    WHEN icss.current_state > 0 AND icss.comment_data IS NULL AND icss.comment_data IS NULL THEN 1
+                    WHEN icss.current_state > 0 AND icsa.comment_data IS NULL AND icssd.comment_data IS NULL THEN 1
                     WHEN icss.current_state > 0 THEN 2
                     ELSE 0
                 END AS badness_level,

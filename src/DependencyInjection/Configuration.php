@@ -19,5 +19,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+
+        return $objTreeBuilder;
     }
 }

@@ -80,7 +80,7 @@ class IcingaStatusController extends Controller
         {
             $arrViewEntry = [];
 
-            $strHostState = getStateName($arrRow['host_state']);
+            $strHostState = $this->getStateName($arrRow['host_state']);
             $strSomeoneIsOnItTail = $arrRow['someone_is_on_it'] ? ' someone-is-on-it' : '';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
@@ -104,7 +104,7 @@ class IcingaStatusController extends Controller
             }
             else
             {
-                $strServiceState = getStateName($arrRow['service_state']);
+                $strServiceState = $this->getStateName($arrRow['service_state']);
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState}{$strSomeoneIsOnItTail}";

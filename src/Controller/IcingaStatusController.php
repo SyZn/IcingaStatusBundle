@@ -17,7 +17,11 @@ class IcingaStatusController extends Controller
                 ichs.current_state AS host_state,
                 NULL AS service_state,
                 ichs.current_state AS current_state,
-                CASE WHEN ichs.current_state > 0 THEN 1 ELSE 0 END AS is_bad,
+                CASE
+                    WHEN ichs.current_state > 0 AND icha.comment_data IS NULL AND ichsd.comment_data IS NULL THEN 1
+                    WHEN ichs.current_state > 0 THEN 2
+                    ELSE 0
+                END AS badness_level,
                 ichs.last_state_change AS last_change,
                 ichs.output AS output,
                 ichs.long_output AS long_output,
@@ -41,7 +45,12 @@ class IcingaStatusController extends Controller
                 ichs.current_state AS host_state,
                 icss.current_state AS service_state,
                 icss.current_state AS current_state,
-                CASE WHEN ichs.current_state > 0 THEN 1 ELSE 0 END AS is_bad,
+                CASE
+                    WHEN icss.current_state > 0 AND ichs.current_state > 0 THEN 1
+                    WHEN icss.current_state > 0 AND icss.comment_data IS NULL AND icss.comment_data IS NULL THEN 1
+                    WHEN icss.current_state > 0 THEN 2
+                    ELSE 0
+                END AS badness_level,
                 icss.last_state_change AS last_change,
                 icss.output AS output,
                 icss.long_output AS long_output,
@@ -62,7 +71,7 @@ class IcingaStatusController extends Controller
                 AND icso.is_active = 1
         ) AS innerquery
         ORDER BY
-            is_bad DESC,
+            badness_level DESC,
             someone_is_on_it,
             CASE WHEN service_name IS NULL THEN 0 ELSE 1 END,
             current_state DESC,

@@ -14,11 +14,11 @@
                 <div class="status-duration">{{ entry.status_duration }}</div>
             </td>
             <td class="info-box">
-                <div class="entry-name">{{ entry.name }}</div>
+                <div class="entry-name">{{ entry.name | raw }}</div>
                 {% if entry.comment %}
-                <div class="entry-comment">{{ entry.comment }}</div>
+                <div class="entry-comment">{{ entry.comment | raw }}</div>
                 {% endif %}
-                <div class="entry-output">{{ entry.output }}</div>
+                <div class="entry-output">{{ entry.output | raw }}</div>
             </td>
         </tr>
         {% endfor %}

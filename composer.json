@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavuAlHemio\\IcingaStatusBundle": "src/"
+            "RavuAlHemio\\IcingaStatusBundle\\": "src/"
         }
     },
     "extra": {

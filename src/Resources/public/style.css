@@ -1,0 +1,53 @@
+body {
+  font-family: "Tahoma", "Verdana", sans-serif;
+  font-size: 14px; }
+
+h1 {
+  display: none; }
+
+tr:hover {
+  background-color: #f5fdff; }
+
+td {
+  padding: 0.3em 1em;
+  vertical-align: top; }
+
+.entry-output {
+  margin-top: 0.5em;
+  font-family: "Liberation Mono", "Lucida Console", "Courier", monospace;
+  color: #7f7f7f; }
+
+.entry-comment {
+  margin-top: 0.3em;
+  color: #7f7f7f; }
+
+.status-type {
+  text-transform: uppercase; }
+
+.status-box {
+  border-left-width: 5px;
+  border-left-style: solid; }
+
+.host.host-down.unacknowledged .status-box, .service.service-critical.unacknowledged .status-box {
+  background-color: #ff5566;
+  border-left-color: #ff5566; }
+
+.host.host-down.acknowledged .status-box, .service.service-critical.acknowledged .status-box {
+  border-left: #ff99aa; }
+
+.host.host-warning.unacknowledged .status-box, .service.service-warning.unacknowledged .status-box {
+  background-color: #ffaa44;
+  border-left-color: #ffaa44; }
+
+.host.host-warning.acknowledged .status-box, .service.service-warning.acknowledged .status-box {
+  border-left-color: #ffcc66; }
+
+.host.host-unknown.unacknowledged .status-box, .service.service-unknown.unacknowledged .status-box {
+  background-color: #aa44ff;
+  border-left-color: #aa44ff; }
+
+.host.host-unknown.acknowledged .status-box, .service.service-unknown.acknowledged .status-box {
+  border-left-color: #cc77ff; }
+
+.host.host-up .status-box, .service.service-up .status-box {
+  border-left-color: #44bb77; }

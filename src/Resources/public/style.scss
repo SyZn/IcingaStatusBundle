@@ -1,0 +1,115 @@
+$base-fonts: "Tahoma", "Verdana", sans-serif;
+$base-font-size: 14px;
+$output-fonts: "Liberation Mono", "Lucida Console", "Courier", monospace;
+$output-font-size: 14px;
+
+$crit-color: #ff5566;
+$crit-color-ack: #ff99aa;
+$warn-color: #ffaa44;
+$warn-color-ack: #ffcc66;
+$unkn-color: #aa44ff;
+$unkn-color-ack: #cc77ff;
+$ok-color: #44bb77;
+$output-color: #7f7f7f;
+$comment-color: #7f7f7f;
+$hover-color: #f5fdff;
+
+$comment-margin-top: 0.3em;
+$output-margin-top: 0.5em;
+$left-border-width: 5px;
+
+body
+{
+    font-family: $base-fonts;
+    font-size: $base-font-size;
+}
+
+h1
+{
+    display: none;
+}
+
+tr:hover
+{
+    background-color: $hover-color;
+}
+
+td
+{
+    padding: 0.3em 1em;
+    vertical-align: top;
+}
+
+.entry-output
+{
+    margin-top: $output-margin-top;
+    font-family: $output-fonts;
+    color: $output-color;
+}
+
+.entry-comment
+{
+    margin-top: $comment-margin-top;
+    color: $comment-color;
+}
+
+.status-type
+{
+    text-transform: uppercase;
+}
+
+.status-box
+{
+    border-left-width: $left-border-width;
+    border-left-style: solid;
+}
+
+.host.host-down, .service.service-critical
+{
+    &.unacknowledged .status-box
+    {
+        background-color: $crit-color;
+        border-left-color: $crit-color;
+    }
+
+    &.acknowledged .status-box
+    {
+        border-left: $crit-color-ack;
+    }
+}
+
+.host.host-warning, .service.service-warning
+{
+    &.unacknowledged .status-box
+    {
+        background-color: $warn-color;
+        border-left-color: $warn-color;
+    }
+
+    &.acknowledged .status-box
+    {
+        border-left-color: $warn-color-ack;
+    }
+}
+
+.host.host-unknown, .service.service-unknown
+{
+    &.unacknowledged .status-box
+    {
+        background-color: $unkn-color;
+        border-left-color: $unkn-color;
+    }
+
+    &.acknowledged .status-box
+    {
+        border-left-color: $unkn-color-ack;
+    }
+}
+
+.host.host-up, .service.service-up
+{
+    .status-box
+    {
+        border-left-color: $ok-color;
+    }
+}

@@ -28,6 +28,12 @@ td {
   border-left-width: 5px;
   border-left-style: solid; }
 
+.acknowledged .status-box {
+  color: #000; }
+
+.unacknowledged .status-box {
+  color: #ffffff; }
+
 .host.host-down.unacknowledged .status-box, .service.service-critical.unacknowledged .status-box {
   background-color: #ff5566;
   border-left-color: #ff5566; }

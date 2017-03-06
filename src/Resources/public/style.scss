@@ -64,6 +64,16 @@ td
     border-left-style: solid;
 }
 
+.acknowledged .status-box
+{
+    color: #000;
+}
+
+.unacknowledged .status-box
+{
+    color: #ffffff;
+}
+
 .host.host-down, .service.service-critical
 {
     &.unacknowledged .status-box

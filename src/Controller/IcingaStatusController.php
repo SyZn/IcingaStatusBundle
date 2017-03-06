@@ -96,7 +96,7 @@ class IcingaStatusController extends Controller
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
-            $arrViewEntry['status_abbr'] = static::getStateAbbr($arrRow['host_state']);
+            $arrViewEntry['status_abbr'] = static::getStateAbbr($arrRow['current_state']);
 
             $dtzLocal = new \DateTimeZone(date_default_timezone_get());
             $dtmLastChange = \DateTime::createFromFormat('Y-m-d H:i:s', $arrRow['last_change'], $dtzLocal);

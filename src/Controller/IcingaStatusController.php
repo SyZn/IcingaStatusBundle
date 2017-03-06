@@ -72,7 +72,6 @@ class IcingaStatusController extends Controller
         ) AS innerquery
         ORDER BY
             badness_level DESC,
-            someone_is_on_it,
             CASE WHEN service_name IS NULL THEN 0 ELSE 1 END,
             current_state DESC,
             host_name,

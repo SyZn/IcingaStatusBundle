@@ -18,8 +18,8 @@ class IcingaStatusController extends Controller
                 NULL AS service_state,
                 ichs.current_state AS current_state,
                 CASE
-                    WHEN ichs.current_state > 0 AND icha.comment_data IS NULL AND ichsd.comment_data IS NULL THEN 1
-                    WHEN ichs.current_state > 0 THEN 2
+                    WHEN ichs.current_state > 0 AND icha.comment_data IS NULL AND ichsd.comment_data IS NULL THEN 2
+                    WHEN ichs.current_state > 0 THEN 1
                     ELSE 0
                 END AS badness_level,
                 ichs.last_state_change AS last_change,
@@ -47,8 +47,8 @@ class IcingaStatusController extends Controller
                 icss.current_state AS current_state,
                 CASE
                     WHEN icss.current_state > 0 AND ichs.current_state > 0 THEN 1
-                    WHEN icss.current_state > 0 AND icsa.comment_data IS NULL AND icssd.comment_data IS NULL THEN 1
-                    WHEN icss.current_state > 0 THEN 2
+                    WHEN icss.current_state > 0 AND icsa.comment_data IS NULL AND icssd.comment_data IS NULL THEN 2
+                    WHEN icss.current_state > 0 THEN 1
                     ELSE 0
                 END AS badness_level,
                 icss.last_state_change AS last_change,

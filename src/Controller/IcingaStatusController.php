@@ -92,7 +92,7 @@ class IcingaStatusController extends Controller
             $arrViewEntry = [];
 
             $strHostState = static::getHostStateName($arrRow['host_state']);
-            $strSomeoneIsOnItTail = $arrRow['someone_is_on_it'] ? ' someone-is-on-it' : '';
+            $strAcknowledgement = $arrRow['someone_is_on_it'] ? 'acknowledged' : 'unacknowledged';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
@@ -115,7 +115,7 @@ class IcingaStatusController extends Controller
             if ($arrRow['service_name'] === null)
             {
                 $arrViewEntry['type'] = 'host';
-                $arrViewEntry['status'] = "host-{$strHostState}{$strSomeoneIsOnItTail}";
+                $arrViewEntry['status'] = "host-{$strHostState} {$strAcknowledgement}";
                 $arrViewEntry['status_abbr'] = static::getHostStateAbbr($arrRow['host_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']);
             }
@@ -124,7 +124,7 @@ class IcingaStatusController extends Controller
                 $strServiceState = static::getServiceStateName($arrRow['service_state']);
 
                 $arrViewEntry['type'] = 'service';
-                $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState}{$strSomeoneIsOnItTail}";
+                $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState} {$strAcknowledgement}";
                 $arrViewEntry['status_abbr'] = static::getServiceStateAbbr($arrRow['service_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']) . ' &middot; ' . htmlspecialchars($arrRow['service_name']);
             }

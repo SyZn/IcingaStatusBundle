@@ -75,7 +75,7 @@ td
 
     &.acknowledged .status-box
     {
-        border-left: $crit-color-ack;
+        border-left-color: $crit-color-ack;
         color: #000000;
     }
 }

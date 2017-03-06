@@ -34,7 +34,7 @@ td {
   color: #ffffff; }
 
 .host.host-down.acknowledged .status-box, .service.service-critical.acknowledged .status-box {
-  border-left: #ff99aa;
+  border-left-color: #ff99aa;
   color: #000000; }
 
 .host.host-warning.unacknowledged .status-box, .service.service-warning.unacknowledged .status-box {

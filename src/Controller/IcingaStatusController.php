@@ -18,6 +18,7 @@ class IcingaStatusController extends Controller
                 NULL AS service_state,
                 ichs.current_state AS current_state,
                 CASE WHEN ichs.current_state > 0 THEN 1 ELSE 0 END AS is_bad,
+                ichs.last_state_change AS last_change,
                 ichs.output AS output,
                 ichs.long_output AS long_output,
                 icha.comment_data AS ack_comment,
@@ -41,6 +42,7 @@ class IcingaStatusController extends Controller
                 icss.current_state AS service_state,
                 icss.current_state AS current_state,
                 CASE WHEN ichs.current_state > 0 THEN 1 ELSE 0 END AS is_bad,
+                icss.last_state_change AS last_change,
                 icss.output AS output,
                 icss.long_output AS long_output,
                 icsa.comment_data AS ack_comment,
@@ -80,11 +82,16 @@ class IcingaStatusController extends Controller
         {
             $arrViewEntry = [];
 
-            $strHostState = $this->getStateName($arrRow['host_state']);
+            $strHostState = static::getStateName($arrRow['host_state']);
             $strSomeoneIsOnItTail = $arrRow['someone_is_on_it'] ? ' someone-is-on-it' : '';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
+            $arrViewEntry['status_abbr'] = static::getStateAbbr($arrRow['host_state']);
+
+            $dtmLastChange = $arrRow['last_change'];
+            $dtmNow = new \DateTime();
+            $arrViewEntry['status_duration'] = static::formatDateTimeDelta($dtmNow, $dtmLastChange);
 
             $arrViewEntry['comment'] = null;
             if ($arrRow['ack_comment'])
@@ -104,7 +111,7 @@ class IcingaStatusController extends Controller
             }
             else
             {
-                $strServiceState = $this->getStateName($arrRow['service_state']);
+                $strServiceState = static::getStateName($arrRow['service_state']);
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState}{$strSomeoneIsOnItTail}";
@@ -119,7 +126,7 @@ class IcingaStatusController extends Controller
         ]);
     }
 
-    protected function getStateName($intStateCode)
+    protected static function getStateName($intStateCode)
     {
         switch ($intStateCode)
         {
@@ -134,5 +141,58 @@ class IcingaStatusController extends Controller
             default:
                 return 'invalidcode';
         }
+    }
+
+    protected static function getStateAbbr($intStateCode)
+    {
+        switch ($intStateCode)
+        {
+            case 0:
+                return 'OK';
+            case 1:
+                return 'warn';
+            case 2:
+                return 'crit';
+            case 3:
+                return 'unknown';
+            default:
+                return '???';
+        }
+    }
+
+    protected static function formatDateTimeDelta(\DateTimeInterface $dtmNow, \DateTimeInterface $dtmThen)
+    {
+        $dinDelta = $dtmNow->diff($dtmThen);
+
+        if ($dinDelta->days >= 2)
+        {
+            // output the date instead
+            return $dtmNow->format('d M H:i');
+        }
+
+        $strDelta = '';
+        if ($dinDelta->d > 0)
+        {
+            $strDelta = $dinDelta->format('%d d %h:%I');
+        }
+        else if ($dinDelta->h > 0)
+        {
+            $strDelta = $dinDelta->format('%h:%I');
+        }
+        else if ($dinDelta->m > 0)
+        {
+            $strDelta = $dinDelta->format('%I min');
+        }
+        else
+        {
+            $strDelta = $dinDelta->format('%s s');
+        }
+
+        if ($dinDelta->invert)
+        {
+            $strDelta = "in $strDelta";
+        }
+
+        return $strDelta;
     }
 }

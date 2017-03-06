@@ -10,7 +10,7 @@
         {% for entry in entries %}
         <tr class="{{ entry.type }} {{ entry.status }}">
             <td class="status-box">
-                <div class="status-type">{{ entry.status_type }}</div>
+                <div class="status-type">{{ entry.status_abbr }}</div>
                 <div class="status-duration">{{ entry.status_duration }}</div>
             </td>
             <td class="info-box">

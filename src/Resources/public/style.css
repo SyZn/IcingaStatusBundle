@@ -28,32 +28,33 @@ td {
   border-left-width: 5px;
   border-left-style: solid; }
 
-.acknowledged .status-box {
-  color: #000; }
-
-.unacknowledged .status-box {
-  color: #ffffff; }
-
 .host.host-down.unacknowledged .status-box, .service.service-critical.unacknowledged .status-box {
   background-color: #ff5566;
-  border-left-color: #ff5566; }
+  border-left-color: #ff5566;
+  color: #ffffff; }
 
 .host.host-down.acknowledged .status-box, .service.service-critical.acknowledged .status-box {
-  border-left: #ff99aa; }
+  border-left: #ff99aa;
+  color: #000000; }
 
 .host.host-warning.unacknowledged .status-box, .service.service-warning.unacknowledged .status-box {
   background-color: #ffaa44;
-  border-left-color: #ffaa44; }
+  border-left-color: #ffaa44;
+  color: #ffffff; }
 
 .host.host-warning.acknowledged .status-box, .service.service-warning.acknowledged .status-box {
-  border-left-color: #ffcc66; }
+  border-left-color: #ffcc66;
+  color: #000000; }
 
 .host.host-unknown.unacknowledged .status-box, .service.service-unknown.unacknowledged .status-box {
   background-color: #aa44ff;
-  border-left-color: #aa44ff; }
+  border-left-color: #aa44ff;
+  color: #ffffff; }
 
 .host.host-unknown.acknowledged .status-box, .service.service-unknown.acknowledged .status-box {
-  border-left-color: #cc77ff; }
+  border-left-color: #cc77ff;
+  color: #000000; }
 
 .host.host-up .status-box, .service.service-up .status-box {
-  border-left-color: #44bb77; }
+  border-left-color: #44bb77;
+  color: #000000; }

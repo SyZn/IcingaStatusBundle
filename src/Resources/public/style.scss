@@ -64,27 +64,19 @@ td
     border-left-style: solid;
 }
 
-.acknowledged .status-box
-{
-    color: #000;
-}
-
-.unacknowledged .status-box
-{
-    color: #ffffff;
-}
-
 .host.host-down, .service.service-critical
 {
     &.unacknowledged .status-box
     {
         background-color: $crit-color;
         border-left-color: $crit-color;
+        color: #ffffff;
     }
 
     &.acknowledged .status-box
     {
         border-left: $crit-color-ack;
+        color: #000000;
     }
 }
 
@@ -94,11 +86,13 @@ td
     {
         background-color: $warn-color;
         border-left-color: $warn-color;
+        color: #ffffff;
     }
 
     &.acknowledged .status-box
     {
         border-left-color: $warn-color-ack;
+        color: #000000;
     }
 }
 
@@ -108,11 +102,13 @@ td
     {
         background-color: $unkn-color;
         border-left-color: $unkn-color;
+        color: #ffffff;
     }
 
     &.acknowledged .status-box
     {
         border-left-color: $unkn-color-ack;
+        color: #000000;
     }
 }
 
@@ -121,5 +117,6 @@ td
     .status-box
     {
         border-left-color: $ok-color;
+        color: #000000;
     }
 }

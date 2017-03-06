@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>{% block title %}Untitled Page{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('bundles/ravualhemioicingastatus/style.css') }}" />
+    {% block viewport %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% endblock %}
     {% block head %}
     {% endblock %}
 </head>

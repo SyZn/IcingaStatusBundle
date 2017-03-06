@@ -1,0 +1,13 @@
+# no Composer, lock, dependencies
+composer.phar
+composer.lock
+vendor/
+
+# no VS Code project data
+.vscode/
+
+# no TypeScript js map files
+*.js.map
+
+# no Sass CSS files
+src/Resources/public/style.css

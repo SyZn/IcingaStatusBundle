@@ -1,0 +1,27 @@
+{
+    "name": "ravualhemio/icinga-status-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Icinga status bundle",
+    "license": "CC0-1.0+",
+    "authors": [
+        {
+            "name": "Ondřej Hošek",
+            "homepage": "https://github.com/RavuAlHemio"
+        }
+    ],
+    "require": {
+        "php": "=>7.0",
+        "symfony/framework-bundle": "^3.0",
+        "doctrine/doctrine-bundle": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "RavuAlHemio\\IcingaStatusBundle": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

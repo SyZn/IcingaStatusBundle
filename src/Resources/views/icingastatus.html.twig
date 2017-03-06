@@ -1,0 +1,26 @@
+{% extends "@RavuAlHemioIcingaStatus/base.html.twig" %}
+
+{% block title %}Icinga Status{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <table class="icinga-status">
+        {% for entry in entries %}
+        <tr class="{{ entry.type }} {{ entry.status }}">
+            <td class="status-box">
+                <div class="status-type">{{ entry.status_type }}</div>
+                <div class="status-duration">{{ entry.status_duration }}</div>
+            </td>
+            <td class="info-box">
+                <div class="entry-name">{{ entry.name }}</div>
+                {% if entry.comment %}
+                <div class="entry-comment">{{ entry.comment }}</div>
+                {% endif %}
+                <div class="entry-output">{{ entry.output }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

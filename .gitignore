@@ -8,6 +8,3 @@ vendor/
 
 # no TypeScript js map files
 *.js.map
-
-# no Sass CSS files
-src/Resources/public/style.css

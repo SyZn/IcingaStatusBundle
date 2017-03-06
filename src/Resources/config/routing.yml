@@ -1,0 +1,5 @@
+icinga_status:
+  path: /
+  methods: [GET]
+  defaults:
+    _controller: RavuAlHemioIcingaStatusBundle:IcingaStatus:showStatus

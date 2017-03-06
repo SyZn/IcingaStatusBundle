@@ -91,12 +91,11 @@ class IcingaStatusController extends Controller
         {
             $arrViewEntry = [];
 
-            $strHostState = static::getStateName($arrRow['host_state']);
+            $strHostState = static::getHostStateName($arrRow['host_state']);
             $strSomeoneIsOnItTail = $arrRow['someone_is_on_it'] ? ' someone-is-on-it' : '';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
-            $arrViewEntry['status_abbr'] = static::getStateAbbr($arrRow['current_state']);
 
             $dtzLocal = new \DateTimeZone(date_default_timezone_get());
             $dtmLastChange = \DateTime::createFromFormat('Y-m-d H:i:s', $arrRow['last_change'], $dtzLocal);
@@ -117,14 +116,16 @@ class IcingaStatusController extends Controller
             {
                 $arrViewEntry['type'] = 'host';
                 $arrViewEntry['status'] = "host-{$strHostState}{$strSomeoneIsOnItTail}";
+                $arrViewEntry['status_abbr'] = static::getHostStateAbbr($arrRow['host_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']);
             }
             else
             {
-                $strServiceState = static::getStateName($arrRow['service_state']);
+                $strServiceState = static::getServiceStateName($arrRow['service_state']);
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState}{$strSomeoneIsOnItTail}";
+                $arrViewEntry['status_abbr'] = static::getServiceStateAbbr($arrRow['service_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']) . ' &middot; ' . htmlspecialchars($arrRow['service_name']);
             }
 
@@ -136,7 +137,7 @@ class IcingaStatusController extends Controller
         ]);
     }
 
-    protected static function getStateName($intStateCode)
+    protected static function getServiceStateName($intStateCode)
     {
         switch ($intStateCode)
         {
@@ -149,11 +150,11 @@ class IcingaStatusController extends Controller
             case 3:
                 return 'unknown';
             default:
-                return 'invalidcode';
+                return 'invalid-code';
         }
     }
 
-    protected static function getStateAbbr($intStateCode)
+    protected static function getServiceStateAbbr($intStateCode)
     {
         switch ($intStateCode)
         {
@@ -165,6 +166,38 @@ class IcingaStatusController extends Controller
                 return 'crit';
             case 3:
                 return 'unknown';
+            default:
+                return '???';
+        }
+    }
+
+    protected static function getHostStateName($intStateCode)
+    {
+        switch ($intStateCode)
+        {
+            case 0:
+                return 'up';
+            case 1:
+                return 'warning';
+            case 2:
+            case 3:
+                return 'down';
+            default:
+                return 'invalid-code';
+        }
+    }
+
+    protected static function getHostStateAbbr($intStateCode)
+    {
+        switch ($intStateCode)
+        {
+            case 0:
+                return 'up';
+            case 1:
+                return 'warn';
+            case 2:
+            case 3:
+                return 'down';
             default:
                 return '???';
         }

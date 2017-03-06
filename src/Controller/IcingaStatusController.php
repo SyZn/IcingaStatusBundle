@@ -163,7 +163,7 @@ class IcingaStatusController extends Controller
 
     protected static function formatDateTimeDelta(\DateTimeInterface $dtmNow, \DateTimeInterface $dtmThen)
     {
-        $dinDelta = $dtmNow->diff($dtmThen);
+        $dinDelta = $dtmThen->diff($dtmNow);
 
         if ($dinDelta->days >= 2)
         {

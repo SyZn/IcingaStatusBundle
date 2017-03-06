@@ -108,7 +108,7 @@ class IcingaStatusController extends Controller
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState}{$strSomeoneIsOnItTail}";
-                $arrViewEntry['name'] = htmlspecialchars($arrRow['name']);
+                $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']) . ' &middot; ' . htmlspecialchars($arrRow['service_name']);
             }
 
             $arrViewEntries[] = $arrViewEntry;

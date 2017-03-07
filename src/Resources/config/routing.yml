@@ -3,3 +3,9 @@ icinga_status_list:
   methods: [GET]
   defaults:
     _controller: RavuAlHemioIcingaStatusBundle:StatusList:statusList
+
+icinga_service_matrix:
+  path: /icinga/matrix
+  methods: [GET]
+  defaults:
+    _controller: RavuAlHemioIcingaStatusBundle:ServiceMatrix:serviceMatrix

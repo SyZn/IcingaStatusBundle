@@ -1,0 +1,31 @@
+{% extends "@RavuAlHemioIcingaStatus/base.html.twig" %}
+
+{% block title %}Icinga Service Matrix{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <table class="service-matrix">
+        <thead>
+            <tr>
+                <td>Host</td>
+                {% for sgoid in service_group_oids %}
+                <td class="service-group-name">{{ service_group_names[sgoid] }}</td>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for hoid in host_oids %}
+            <tr class="host">
+                <td class="host-name host-{{ hosts[hoid].state }}">{{ hosts[hoid].name }}</td>
+                {% for sgoid in service_group_oids %}
+                <td class="service-group-status service-group-{{ hosts_to_services_to_info[hoid][sgoid].worst_state }}">
+                    <span class="service-count">{{ hosts_to_services_to_info[hoid][sgoid].service_count }}</span>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

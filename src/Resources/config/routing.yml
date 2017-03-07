@@ -1,5 +1,5 @@
-icinga_status:
+icinga_status_list:
   path: /icinga/status
   methods: [GET]
   defaults:
-    _controller: RavuAlHemioIcingaStatusBundle:IcingaStatus:showStatus
+    _controller: RavuAlHemioIcingaStatusBundle:StatusList:statusList

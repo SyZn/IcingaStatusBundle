@@ -3,9 +3,10 @@
 namespace RavuAlHemio\IcingaStatusBundle\Controller;
 
 use Doctrine\DBAL\Connection;
+use RavuAlHemio\IcingaStatusBundle\Utility\StateNameUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class IcingaStatusController extends Controller
+class StatusListController extends Controller
 {
     const STATUS_QUERY = '
         SELECT
@@ -78,7 +79,7 @@ class IcingaStatusController extends Controller
             service_name
     ';
 
-    public function showStatusAction()
+    public function statusListAction()
     {
         $strConnName = $this->container->getParameter('icingastatus.database_connection');
         /** @var Connection $objConn */
@@ -86,11 +87,11 @@ class IcingaStatusController extends Controller
 
         $objStmt = $objConn->executeQuery(static::STATUS_QUERY);
         $arrViewEntries = [];
-        while ($arrRow = $objStmt->fetch())
+        while (($arrRow = $objStmt->fetch()))
         {
             $arrViewEntry = [];
 
-            $strHostState = static::getHostStateName($arrRow['host_state']);
+            $strHostState = StateNameUtils::getHostStateCSSClassName($arrRow['host_state']);
             $strAcknowledgement = $arrRow['someone_is_on_it'] ? 'acknowledged' : 'unacknowledged';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
@@ -115,16 +116,16 @@ class IcingaStatusController extends Controller
             {
                 $arrViewEntry['type'] = 'host';
                 $arrViewEntry['status'] = "host-{$strHostState} {$strAcknowledgement}";
-                $arrViewEntry['status_abbr'] = static::getHostStateAbbr($arrRow['host_state']);
+                $arrViewEntry['status_abbr'] = StateNameUtils::getHostStateDisplayAbbr($arrRow['host_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']);
             }
             else
             {
-                $strServiceState = static::getServiceStateName($arrRow['service_state']);
+                $strServiceState = StateNameUtils::getServiceStateCSSClassName($arrRow['service_state']);
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState} {$strAcknowledgement}";
-                $arrViewEntry['status_abbr'] = static::getServiceStateAbbr($arrRow['service_state']);
+                $arrViewEntry['status_abbr'] = StateNameUtils::getServiceStateDisplayAbbr($arrRow['service_state']);
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']) . ' &middot; ' . htmlspecialchars($arrRow['service_name']);
             }
 
@@ -134,72 +135,6 @@ class IcingaStatusController extends Controller
         return $this->render('@RavuAlHemioIcingaStatus/icingastatus.html.twig', [
             'entries' => $arrViewEntries
         ]);
-    }
-
-    protected static function getServiceStateName($intStateCode)
-    {
-        switch ($intStateCode)
-        {
-            case 0:
-                return 'ok';
-            case 1:
-                return 'warning';
-            case 2:
-                return 'critical';
-            case 3:
-                return 'unknown';
-            default:
-                return 'invalid-code';
-        }
-    }
-
-    protected static function getServiceStateAbbr($intStateCode)
-    {
-        switch ($intStateCode)
-        {
-            case 0:
-                return 'OK';
-            case 1:
-                return 'warn';
-            case 2:
-                return 'crit';
-            case 3:
-                return 'unknown';
-            default:
-                return '???';
-        }
-    }
-
-    protected static function getHostStateName($intStateCode)
-    {
-        switch ($intStateCode)
-        {
-            case 0:
-                return 'up';
-            case 1:
-                return 'warning';
-            case 2:
-            case 3:
-                return 'down';
-            default:
-                return 'invalid-code';
-        }
-    }
-
-    protected static function getHostStateAbbr($intStateCode)
-    {
-        switch ($intStateCode)
-        {
-            case 0:
-                return 'up';
-            case 1:
-                return 'warn';
-            case 2:
-            case 3:
-                return 'down';
-            default:
-                return '???';
-        }
     }
 
     protected static function formatDateTimeDelta(\DateTimeInterface $dtmNow, \DateTimeInterface $dtmThen)

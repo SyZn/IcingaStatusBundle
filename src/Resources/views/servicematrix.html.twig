@@ -11,7 +11,7 @@
             <tr>
                 <td>Host</td>
                 {% for sgoid in service_group_oids %}
-                <td class="service-group-name">{{ service_group_names[sgoid] }}</td>
+                <td class="service-group-name"><div class="rotator">{{ service_group_names[sgoid] }}</div></td>
                 {% endfor %}
             </tr>
         </thead>

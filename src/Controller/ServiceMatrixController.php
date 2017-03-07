@@ -96,7 +96,7 @@ class ServiceMatrixController extends Controller
         // prepare cross join
         foreach ($arrHostOIDs as $intHostOID)
         {
-            $arrServiceGroupOIDsToWorstStates = [];
+            $arrServiceGroupOIDsToStateInfo = [];
             foreach ($arrServiceGroupOIDs as $intServiceGroupOID)
             {
                 $arrServiceGroupOIDsToStateInfo[$intServiceGroupOID] = [
@@ -105,7 +105,7 @@ class ServiceMatrixController extends Controller
                 ];
             }
 
-            $arrHostOIDsToServiceGroupOIDsToStateInfo[$intHostOID] = $arrServiceGroupOIDsToWorstStates;
+            $arrHostOIDsToServiceGroupOIDsToStateInfo[$intHostOID] = $arrServiceGroupOIDsToStateInfo;
         }
 
         // perform cross join (manually)

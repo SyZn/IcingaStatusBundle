@@ -21,7 +21,7 @@ class StateNameUtils
         }
     }
 
-    protected static function getServiceStateDisplayAbbr($intStateCode)
+    public static function getServiceStateDisplayAbbr($intStateCode)
     {
         switch ($intStateCode)
         {
@@ -38,7 +38,7 @@ class StateNameUtils
         }
     }
 
-    protected static function getHostStateCSSClassName($intStateCode)
+    public static function getHostStateCSSClassName($intStateCode)
     {
         switch ($intStateCode)
         {

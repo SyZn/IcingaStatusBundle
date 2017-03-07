@@ -50,7 +50,7 @@ class ServiceMatrixController extends Controller
             INNER JOIN icinga_servicestatus AS icss ON icss.service_object_id = ics.service_object_id
             INNER JOIN icinga_objects AS icso ON icso.object_id = ics.service_object_id
             INNER JOIN icinga_hosts AS ich ON ich.host_object_id = ics.host_object_id
-            INNER JOIN icinga_object AS icho ON icho.object_id = ich.host_object_id
+            INNER JOIN icinga_objects AS icho ON icho.object_id = ich.host_object_id
         WHERE
             icsgo.is_active = 1
             AND icso.is_active = 1

@@ -40,83 +40,157 @@ td
     vertical-align: top;
 }
 
-.entry-output
+.icinga-status
 {
-    margin-top: $output-margin-top;
-    font-family: $output-fonts;
-    color: $output-color;
-}
-
-.entry-comment
-{
-    margin-top: $comment-margin-top;
-    color: $comment-color;
-}
-
-.status-type
-{
-    text-transform: uppercase;
-}
-
-.status-box
-{
-    border-left-width: $left-border-width;
-    border-left-style: solid;
-}
-
-.host.host-down, .service.service-critical
-{
-    &.unacknowledged .status-box
+    .entry-output
     {
-        background-color: $crit-color;
-        border-left-color: $crit-color;
-        color: #ffffff;
+        margin-top: $output-margin-top;
+        font-family: $output-fonts;
+        color: $output-color;
     }
 
-    &.acknowledged .status-box
+    .entry-comment
     {
-        border-left-color: $crit-color-ack;
-        color: #000000;
-    }
-}
-
-.host.host-warning, .service.service-warning
-{
-    &.unacknowledged .status-box
-    {
-        background-color: $warn-color;
-        border-left-color: $warn-color;
-        color: #ffffff;
+        margin-top: $comment-margin-top;
+        color: $comment-color;
     }
 
-    &.acknowledged .status-box
+    .status-type
     {
-        border-left-color: $warn-color-ack;
-        color: #000000;
-    }
-}
-
-.host.host-unknown, .service.service-unknown
-{
-    &.unacknowledged .status-box
-    {
-        background-color: $unkn-color;
-        border-left-color: $unkn-color;
-        color: #ffffff;
+        text-transform: uppercase;
     }
 
-    &.acknowledged .status-box
-    {
-        border-left-color: $unkn-color-ack;
-        color: #000000;
-    }
-}
-
-.host.host-up, .service.service-ok
-{
     .status-box
     {
-        border-left-color: $ok-color;
-        color: #000000;
+        border-left-width: $left-border-width;
+        border-left-style: solid;
+    }
+
+    .host.host-down, .service.service-critical
+    {
+        &.unacknowledged .status-box
+        {
+            background-color: $crit-color;
+            border-left-color: $crit-color;
+            color: #ffffff;
+        }
+
+        &.acknowledged .status-box
+        {
+            border-left-color: $crit-color-ack;
+            color: #000000;
+        }
+    }
+
+    .host.host-warning, .service.service-warning
+    {
+        &.unacknowledged .status-box
+        {
+            background-color: $warn-color;
+            border-left-color: $warn-color;
+            color: #ffffff;
+        }
+
+        &.acknowledged .status-box
+        {
+            border-left-color: $warn-color-ack;
+            color: #000000;
+        }
+    }
+
+    .host.host-unknown, .service.service-unknown
+    {
+        &.unacknowledged .status-box
+        {
+            background-color: $unkn-color;
+            border-left-color: $unkn-color;
+            color: #ffffff;
+        }
+
+        &.acknowledged .status-box
+        {
+            border-left-color: $unkn-color-ack;
+            color: #000000;
+        }
+    }
+
+    .host.host-up, .service.service-ok
+    {
+        .status-box
+        {
+            border-left-color: $ok-color;
+            color: #000000;
+        }
+    }
+}
+
+.service-matrix
+{
+    .host-header
+    {
+        vertical-align: bottom;
+    }
+
+    .service-group-name
+    {
+        white-space: nowrap;
+        height: 12em;
+        padding: 0.3em 0.4em;
+
+        .rotator
+        {
+            transform: translate(0px, 10.5em) rotate(-45deg);
+            width: 1em;
+        }
+    }
+
+    .host .host-warning
+    {
+        background-color: $warn-color;
+        color: #ffffff;
+    }
+
+    .host .host-critical
+    {
+        background-color: $crit-color;
+        color: #ffffff;
+    }
+
+    .host .host-unknown
+    {
+        background-color: $unkn-color;
+        color: #ffffff;
+    }
+
+    .service-group-status
+    {
+        padding: 0;
+        min-width: 1em;
+        min-height: 1em;
+    }
+
+    .service-group-status.service-group-critical
+    {
+        background-color: $crit-color;
+    }
+
+    .service-group-status.service-group-warning
+    {
+        background-color: $warn-color;
+    }
+
+    .service-group-status.service-group-unknown
+    {
+        background-color: $unkn-color;
+    }
+
+    .service-group-status.service-group-ok
+    {
+        background-color: $ok-color;
+    }
+
+    .service-group-status .service-count
+    {
+        display: none;
     }
 }

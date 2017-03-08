@@ -144,7 +144,7 @@ class StatusListController extends Controller
         if ($dinDelta->days >= 2)
         {
             // output the date instead
-            return $dtmNow->format('d M H:i');
+            return $dtmThen->format('d M H:i');
         }
 
         $strDelta = '';

@@ -19,6 +19,7 @@ $output-margin-top: 0.5em;
 $left-border-width: 5px;
 
 $service-matrix-header-height: 12em;
+$service-matrix-host-width: 19.5em;
 
 body
 {
@@ -131,6 +132,11 @@ td
     .host-header
     {
         vertical-align: bottom;
+    }
+
+    .host-header, .host-name
+    {
+        width: $service-matrix-host-width;
     }
 
     .service-group-name

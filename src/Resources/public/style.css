@@ -62,6 +62,9 @@ td {
 .service-matrix .host-header {
   vertical-align: bottom; }
 
+.service-matrix .host-header, .service-matrix .host-name {
+  width: 19.5em; }
+
 .service-matrix .service-group-name {
   white-space: nowrap;
   height: 12em;

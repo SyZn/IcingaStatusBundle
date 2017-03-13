@@ -62,9 +62,6 @@ td {
 .service-matrix .host-header {
   vertical-align: bottom; }
 
-.service-matrix .host-header, .service-matrix .host-name {
-  width: 19.5em; }
-
 .service-matrix .service-group-name {
   white-space: nowrap;
   height: 12em;
@@ -72,12 +69,6 @@ td {
   .service-matrix .service-group-name .rotator {
     transform: translate(0px, 10.5em) rotate(-45deg);
     width: 1em; }
-
-.service-matrix tr.header {
-  position: fixed; }
-
-.service-matrix tr.spacing-row > td {
-  padding-bottom: 12em; }
 
 .service-matrix .host .host-warning {
   background-color: #ffaa44;

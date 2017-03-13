@@ -18,9 +18,6 @@ $comment-margin-top: 0.3em;
 $output-margin-top: 0.5em;
 $left-border-width: 5px;
 
-$service-matrix-header-height: 12em;
-$service-matrix-host-width: 19.5em;
-
 body
 {
     font-family: $base-fonts;
@@ -134,15 +131,10 @@ td
         vertical-align: bottom;
     }
 
-    .host-header, .host-name
-    {
-        width: $service-matrix-host-width;
-    }
-
     .service-group-name
     {
         white-space: nowrap;
-        height: $service-matrix-header-height;
+        height: 12em;
         padding: 0.3em 0.4em;
 
         .rotator
@@ -150,16 +142,6 @@ td
             transform: translate(0px, 10.5em) rotate(-45deg);
             width: 1em;
         }
-    }
-
-    tr.header
-    {
-        position: fixed;
-    }
-
-    tr.spacing-row > td
-    {
-        padding-bottom: $service-matrix-header-height;
     }
 
     .host .host-warning

@@ -8,15 +8,10 @@
 {% block body %}
     <table class="service-matrix">
         <thead>
-            <tr class="header">
+            <tr>
                 <td class="host-header">Host</td>
                 {% for sgoid in service_group_oids %}
                 <td class="service-group-name"><div class="rotator">{{ service_group_names[sgoid] }}</div></td>
-                {% endfor %}
-            </tr>
-            <tr class="spacing-row">
-                {% for sgoid in service_group_oids %}
-                <td></td>
                 {% endfor %}
             </tr>
         </thead>

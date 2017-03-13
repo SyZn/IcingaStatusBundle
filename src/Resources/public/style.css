@@ -70,6 +70,12 @@ td {
     transform: translate(0px, 10.5em) rotate(-45deg);
     width: 1em; }
 
+.service-matrix tr.header {
+  position: fixed; }
+
+.service-matrix tr.spacing-row > td {
+  padding-bottom: 12em; }
+
 .service-matrix .host .host-warning {
   background-color: #ffaa44;
   color: #ffffff; }

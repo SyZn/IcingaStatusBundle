@@ -18,6 +18,8 @@ $comment-margin-top: 0.3em;
 $output-margin-top: 0.5em;
 $left-border-width: 5px;
 
+$service-matrix-header-height: 12em;
+
 body
 {
     font-family: $base-fonts;
@@ -134,7 +136,7 @@ td
     .service-group-name
     {
         white-space: nowrap;
-        height: 12em;
+        height: $service-matrix-header-height;
         padding: 0.3em 0.4em;
 
         .rotator
@@ -142,6 +144,16 @@ td
             transform: translate(0px, 10.5em) rotate(-45deg);
             width: 1em;
         }
+    }
+
+    tr.header
+    {
+        position: fixed;
+    }
+
+    tr.spacing-row > td
+    {
+        padding-bottom: $service-matrix-header-height;
     }
 
     .host .host-warning

@@ -13,16 +13,18 @@ module IcingaStatus
         let hostHeaderElement = <HTMLTableDataCellElement>document.querySelector(".service-matrix .host-header");
         hostHeaderElement.style.width = firstHostNameElementSize[0] + "px";
 
+        let headerRow = <HTMLTableRowElement>document.querySelector(".service-matrix thead tr");
+        let headerRowSize = elementSize(headerRow);
+
         let tableHead = <HTMLTableSectionElement>document.querySelector(".service-matrix thead");
-        let tableHeadSize = elementSize(tableHead);
 
         let spacerRow = document.createElement("tr");
         let spacerCell = document.createElement("td");
-        spacerCell.style.height = tableHeadSize[1] + "px";
+        spacerCell.style.height = headerRowSize[1] + "px";
         spacerRow.appendChild(spacerCell);
         tableHead.appendChild(spacerRow);
 
-        tableHead.style.position = "fixed";
+        headerRow.style.position = "fixed";
     }
 
     function elementSize(element: HTMLElement)

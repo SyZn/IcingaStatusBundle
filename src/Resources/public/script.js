@@ -9,14 +9,15 @@ var IcingaStatus;
         var firstHostNameElementSize = elementSize(firstHostNameElement);
         var hostHeaderElement = document.querySelector(".service-matrix .host-header");
         hostHeaderElement.style.width = firstHostNameElementSize[0] + "px";
+        var headerRow = document.querySelector(".service-matrix thead tr");
+        var headerRowSize = elementSize(headerRow);
         var tableHead = document.querySelector(".service-matrix thead");
-        var tableHeadSize = elementSize(tableHead);
         var spacerRow = document.createElement("tr");
         var spacerCell = document.createElement("td");
-        spacerCell.style.height = tableHeadSize[1] + "px";
+        spacerCell.style.height = headerRowSize[1] + "px";
         spacerRow.appendChild(spacerCell);
         tableHead.appendChild(spacerRow);
-        tableHead.style.position = "fixed";
+        headerRow.style.position = "fixed";
     }
     function elementSize(element) {
         var elementStyle = window.getComputedStyle(element);

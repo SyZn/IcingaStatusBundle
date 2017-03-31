@@ -109,7 +109,7 @@ class StatusListController extends Controller
             }
             else if ($arrRow['downtime_comment'])
             {
-                $arrViewEntry['comment'] = htmlspecialchars($arrRow['ack_comment']);
+                $arrViewEntry['comment'] = htmlspecialchars($arrRow['downtime_comment']);
             }
 
             if ($arrRow['service_name'] === null)

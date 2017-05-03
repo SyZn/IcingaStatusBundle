@@ -28,21 +28,21 @@ td {
   border-left-width: 5px;
   border-left-style: solid; }
 
-.icinga-status .host.host-down.unacknowledged .status-box, .icinga-status .service.service-critical.unacknowledged .status-box {
+.icinga-status .host.host-down.unacknowledged .status-box, .icinga-status .host.host-warning.unacknowledged .status-box, .icinga-status .service.service-critical.unacknowledged .status-box {
   background-color: #ff5566;
   border-left-color: #ff5566;
   color: #ffffff; }
 
-.icinga-status .host.host-down.acknowledged .status-box, .icinga-status .service.service-critical.acknowledged .status-box {
+.icinga-status .host.host-down.acknowledged .status-box, .icinga-status .host.host-warning.acknowledged .status-box, .icinga-status .service.service-critical.acknowledged .status-box {
   border-left-color: #ff99aa;
   color: #000000; }
 
-.icinga-status .host.host-warning.unacknowledged .status-box, .icinga-status .service.service-warning.unacknowledged .status-box {
+.icinga-status .service.service-warning.unacknowledged .status-box {
   background-color: #ffaa44;
   border-left-color: #ffaa44;
   color: #ffffff; }
 
-.icinga-status .host.host-warning.acknowledged .status-box, .icinga-status .service.service-warning.acknowledged .status-box {
+.icinga-status .service.service-warning.acknowledged .status-box {
   border-left-color: #ffcc66;
   color: #000000; }
 

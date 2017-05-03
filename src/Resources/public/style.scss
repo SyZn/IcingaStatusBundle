@@ -66,7 +66,7 @@ td
         border-left-style: solid;
     }
 
-    .host.host-down, .service.service-critical
+    .host.host-down, .host.host-warning, .service.service-critical
     {
         &.unacknowledged .status-box
         {
@@ -82,7 +82,7 @@ td
         }
     }
 
-    .host.host-warning, .service.service-warning
+    .service.service-warning
     {
         &.unacknowledged .status-box
         {

@@ -33,7 +33,11 @@ class StatusListController extends Controller
                 icinga_hosts AS ich
                 INNER JOIN icinga_objects AS icho ON icho.object_id = ich.host_object_id
                 INNER JOIN icinga_hoststatus AS ichs ON ichs.host_object_id = ich.host_object_id
-                LEFT OUTER JOIN icinga_acknowledgements AS icha ON icha.object_id = ich.host_object_id AND ichs.problem_has_been_acknowledged = 1
+                LEFT OUTER JOIN (
+                    SELECT DISTINCT ON (object_id) object_id, comment_data
+                    FROM icinga_acknowledgements
+                    ORDER BY object_id, entry_time DESC
+                ) AS icha ON icha.object_id = ich.host_object_id AND ichs.problem_has_been_acknowledged = 1
                 LEFT OUTER JOIN icinga_scheduleddowntime AS ichsd ON ichsd.object_id = ich.host_object_id AND ichsd.is_in_effect = 1
             WHERE
                 icho.is_active = 1
@@ -65,7 +69,11 @@ class StatusListController extends Controller
                 INNER JOIN icinga_hoststatus AS ichs ON ichs.host_object_id = ich.host_object_id
                 INNER JOIN icinga_objects AS icho ON icho.object_id = ics.host_object_id
                 INNER JOIN icinga_servicestatus AS icss ON icss.service_object_id = ics.service_object_id
-                LEFT OUTER JOIN icinga_acknowledgements AS icsa ON icsa.object_id = ics.service_object_id AND icss.problem_has_been_acknowledged = 1
+                LEFT OUTER JOIN (
+                    SELECT DISTINCT ON (object_id) object_id, comment_data
+                    FROM icinga_acknowledgements
+                    ORDER BY object_id, entry_time DESC
+                ) AS icsa ON icsa.object_id = ics.service_object_id AND icss.problem_has_been_acknowledged = 1
                 LEFT OUTER JOIN icinga_scheduleddowntime AS icssd ON icssd.object_id = ics.service_object_id AND icssd.is_in_effect = 1
             WHERE
                 icho.is_active = 1

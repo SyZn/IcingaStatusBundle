@@ -5,6 +5,7 @@ namespace RavuAlHemio\IcingaStatusBundle\Controller;
 use Doctrine\DBAL\Connection;
 use RavuAlHemio\IcingaStatusBundle\Utility\StateNameUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class StatusListController extends Controller
 {
@@ -79,6 +80,9 @@ class StatusListController extends Controller
                 icho.is_active = 1
                 AND icso.is_active = 1
         ) AS innerquery
+    ';
+
+    const ORDER_BY_HOST_FIRST = '
         ORDER BY
             badness_level DESC,
             CASE WHEN service_name IS NULL THEN 0 ELSE 1 END,
@@ -86,14 +90,34 @@ class StatusListController extends Controller
             host_name,
             service_name
     ';
+    const ORDER_BY_SERVICE_FIRST = '
+        ORDER BY
+            badness_level DESC,
+            CASE WHEN service_name IS NULL THEN 0 ELSE 1 END,
+            current_state DESC,
+            service_name,
+            host_name
+    ';
 
-    public function statusListAction()
+    public function statusListAction(Request $objRequest)
     {
+        $strSort = $objRequest->query->get('sort');
+
+        $strQuery = static::STATUS_QUERY;
+        if ($strSort === 'service')
+        {
+            $strQuery .= static::ORDER_BY_SERVICE_FIRST;
+        }
+        else
+        {
+            $strQuery .= static::ORDER_BY_HOST_FIRST;
+        }
+
         $strConnName = $this->container->getParameter('icingastatus.database_connection');
         /** @var Connection $objConn */
         $objConn = $this->get("doctrine.dbal.{$strConnName}_connection");
 
-        $objStmt = $objConn->executeQuery(static::STATUS_QUERY);
+        $objStmt = $objConn->executeQuery($strQuery);
         $arrViewEntries = [];
         while (($arrRow = $objStmt->fetch()))
         {

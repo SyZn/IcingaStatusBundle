@@ -5,6 +5,7 @@ namespace RavuAlHemio\IcingaStatusBundle\Utility;
 class StateNameUtils
 {
     const PENDING_STATE_CSS_CLASS_NAME = 'pending';
+    const PENDING_STATE_DISPLAY_ABBR = 'pending';
 
     public static function getServiceStateCSSClassName($intStateCode)
     {

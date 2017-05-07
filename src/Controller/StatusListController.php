@@ -154,7 +154,9 @@ class StatusListController extends Controller
             {
                 $arrViewEntry['type'] = 'host';
                 $arrViewEntry['status'] = "host-{$strHostState} {$strAcknowledgement}";
-                $arrViewEntry['status_abbr'] = StateNameUtils::getHostStateDisplayAbbr($arrRow['host_state']);
+                $arrViewEntry['status_abbr'] = $arrRow['host_checked']
+                    ? StateNameUtils::getHostStateDisplayAbbr($arrRow['host_state'])
+                    : StateNameUtils::PENDING_STATE_DISPLAY_ABBR;
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']);
             }
             else
@@ -165,7 +167,9 @@ class StatusListController extends Controller
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState} {$strAcknowledgement}";
-                $arrViewEntry['status_abbr'] = StateNameUtils::getServiceStateDisplayAbbr($arrRow['service_state']);
+                $arrViewEntry['status_abbr'] = $arrRow['service_checked']
+                    ? StateNameUtils::getServiceStateDisplayAbbr($arrRow['service_state'])
+                    : StateNameUtils::PENDING_STATE_DISPLAY_ABBR;
                 $arrViewEntry['name'] = htmlspecialchars($arrRow['host_name']) . ' &middot; ' . htmlspecialchars($arrRow['service_name']);
             }
 

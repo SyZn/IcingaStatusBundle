@@ -55,6 +55,10 @@ td {
   border-left-color: #cc77ff;
   color: #000000; }
 
+.icinga-status .host.host-pending .status-box, .icinga-status .service.service-pending .status-box {
+  border-left-color: #77aaff;
+  color: #000000; }
+
 .icinga-status .host.host-up .status-box, .icinga-status .service.service-ok .status-box {
   border-left-color: #44bb77;
   color: #000000; }

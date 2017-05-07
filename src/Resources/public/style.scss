@@ -13,6 +13,7 @@ $ok-color: #44bb77;
 $output-color: #7f7f7f;
 $comment-color: #7f7f7f;
 $hover-color: #f5fdff;
+$pending-color: #77aaff;
 
 $comment-margin-top: 0.3em;
 $output-margin-top: 0.5em;
@@ -110,6 +111,15 @@ td
         &.acknowledged .status-box
         {
             border-left-color: $unkn-color-ack;
+            color: #000000;
+        }
+    }
+
+    .host.host-pending, .service.service-pending
+    {
+        .status-box
+        {
+            border-left-color: $pending-color;
             color: #000000;
         }
     }

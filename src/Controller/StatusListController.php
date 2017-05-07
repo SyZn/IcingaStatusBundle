@@ -19,6 +19,8 @@ class StatusListController extends Controller
                 ichs.current_state AS host_state,
                 NULL AS service_state,
                 ichs.current_state AS current_state,
+                ichs.has_been_checked AS host_checked,
+                NULL AS service_checked,
                 CASE
                     WHEN ichs.current_state > 0 AND icha.comment_data IS NULL AND ichsd.comment_data IS NULL THEN 2
                     WHEN ichs.current_state > 0 THEN 1
@@ -51,6 +53,8 @@ class StatusListController extends Controller
                 ichs.current_state AS host_state,
                 icss.current_state AS service_state,
                 icss.current_state AS current_state,
+                ichs.has_been_checked AS host_checked,
+                icss.has_been_checked AS service_checked,
                 CASE
                     WHEN icss.current_state > 0 AND ichs.current_state > 0 THEN 1
                     WHEN icss.current_state > 0 AND icsa.comment_data IS NULL AND icssd.comment_data IS NULL THEN 2
@@ -123,7 +127,9 @@ class StatusListController extends Controller
         {
             $arrViewEntry = [];
 
-            $strHostState = StateNameUtils::getHostStateCSSClassName($arrRow['host_state']);
+            $strHostState = $arrRow['host_checked']
+                ? StateNameUtils::getHostStateCSSClassName($arrRow['host_state'])
+                : StateNameUtils::PENDING_STATE_CSS_CLASS_NAME;
             $strAcknowledgement = $arrRow['someone_is_on_it'] ? 'acknowledged' : 'unacknowledged';
 
             $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
@@ -153,7 +159,9 @@ class StatusListController extends Controller
             }
             else
             {
-                $strServiceState = StateNameUtils::getServiceStateCSSClassName($arrRow['service_state']);
+                $strServiceState = $arrRow['service_checked']
+                    ? StateNameUtils::getServiceStateCSSClassName($arrRow['service_state'])
+                    : StateNameUtils::PENDING_STATE_CSS_CLASS_NAME;
 
                 $arrViewEntry['type'] = 'service';
                 $arrViewEntry['status'] = "service-{$strServiceState} host-{$strHostState} {$strAcknowledgement}";

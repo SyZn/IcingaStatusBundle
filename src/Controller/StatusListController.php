@@ -135,7 +135,9 @@ class StatusListController extends Controller
             $strAcknowledgement = $arrRow['someone_is_on_it'] ? 'acknowledged' : 'unacknowledged';
 
             $arrViewEntry['short_output'] = htmlspecialchars($arrRow['output']);
-            $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
+            $arrViewEntry['full_output'] = htmlspecialchars(
+                $arrRow['output'] . "\n" . str_replace("\\n", "\n", $arrRow['long_output'])
+            );
             $arrViewEntry['output'] = $blnFullOutput ? $arrViewEntry['full_output'] : $arrViewEntry['short_output'];
 
             $dtzLocal = new \DateTimeZone(date_default_timezone_get());

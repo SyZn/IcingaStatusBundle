@@ -106,6 +106,8 @@ class StatusListController extends Controller
     public function statusListAction(Request $objRequest)
     {
         $strSort = $objRequest->query->get('sort');
+        $strFullOutput = $objRequest->query->get('fullOutput');
+        $blnFullOutput = !empty($strFullOutput);
 
         $strQuery = static::STATUS_QUERY;
         if ($strSort === 'service')
@@ -132,8 +134,9 @@ class StatusListController extends Controller
                 : StateNameUtils::PENDING_STATE_CSS_CLASS_NAME;
             $strAcknowledgement = $arrRow['someone_is_on_it'] ? 'acknowledged' : 'unacknowledged';
 
-            $arrViewEntry['output'] = htmlspecialchars($arrRow['output']);
+            $arrViewEntry['short_output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
+            $arrViewEntry['output'] = $blnFullOutput ? $arrViewEntries['full_output'] : $arrViewEntries['short_output'];
 
             $dtzLocal = new \DateTimeZone(date_default_timezone_get());
             $dtmLastChange = \DateTime::createFromFormat('Y-m-d H:i:s', $arrRow['last_change'], $dtzLocal);

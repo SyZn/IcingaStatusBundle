@@ -136,7 +136,7 @@ class StatusListController extends Controller
 
             $arrViewEntry['short_output'] = htmlspecialchars($arrRow['output']);
             $arrViewEntry['full_output'] = htmlspecialchars($arrRow['output'] . "\n" . $arrRow['long_output']);
-            $arrViewEntry['output'] = $blnFullOutput ? $arrViewEntries['full_output'] : $arrViewEntries['short_output'];
+            $arrViewEntry['output'] = $blnFullOutput ? $arrViewEntry['full_output'] : $arrViewEntry['short_output'];
 
             $dtzLocal = new \DateTimeZone(date_default_timezone_get());
             $dtmLastChange = \DateTime::createFromFormat('Y-m-d H:i:s', $arrRow['last_change'], $dtzLocal);

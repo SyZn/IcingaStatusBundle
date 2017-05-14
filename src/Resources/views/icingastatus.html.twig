@@ -6,6 +6,12 @@
 {% endblock %}
 
 {% block body %}
+    <!--
+    GET parameters:
+    "sort=service": after sorting objects with bad status first, sort by service-then-host instead of host-then-service
+    "fullOutput=1": show full output instead of only the first line
+    -->
+
     <table class="icinga-status">
         {% for entry in entries %}
         <tr class="{{ entry.type }} {{ entry.status }}">

@@ -48,6 +48,7 @@ td
         margin-top: $output-margin-top;
         font-family: $output-fonts;
         color: $output-color;
+        white-space: pre-wrap;
     }
 
     .entry-comment

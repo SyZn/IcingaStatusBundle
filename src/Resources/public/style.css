@@ -15,7 +15,8 @@ td {
 .icinga-status .entry-output {
   margin-top: 0.5em;
   font-family: "Liberation Mono", "Lucida Console", "Courier", monospace;
-  color: #7f7f7f; }
+  color: #7f7f7f;
+  white-space: pre-wrap; }
 
 .icinga-status .entry-comment {
   margin-top: 0.3em;

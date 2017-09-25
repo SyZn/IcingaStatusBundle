@@ -131,7 +131,7 @@ class StatusListController extends Controller
         $objConn = $this->get("doctrine.dbal.{$strConnName}_connection");
 
         $objStmt = $objConn->executeQuery(static::LAST_STATUS_UPDATE_QUERY);
-        $blnUpToDate = $false;
+        $blnUpToDate = false;
         if (($arrRow = $objStmt->fetch()))
         {
             $intLastUpdateUnix = $arrRow['last_status_update_timestamp'];
@@ -139,7 +139,7 @@ class StatusListController extends Controller
             if ($intNowUnix - $intLastUpdateUnix <= 60)
             {
                 // last status update within 1min
-                $blnUpToDate = $true;
+                $blnUpToDate = true;
             }
         }
 

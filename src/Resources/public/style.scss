@@ -47,7 +47,7 @@ td
     border-left-width: $left-border-width;
     border-left-style: solid;
 
-    .error
+    &.error
     {
         background-color: $crit-color;
         border-left-color: $crit-color;

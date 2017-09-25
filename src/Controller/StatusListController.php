@@ -9,6 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class StatusListController extends Controller
 {
+    const LAST_STATUS_UPDATE_QUERY = '
+        SELECT
+            MIN(UNIX_TIMESTAMP(status_update_time)) AS last_status_update_timestamp
+        FROM
+            icinga_programstatus
+    ';
+
     const STATUS_QUERY = '
         SELECT
             *
@@ -123,6 +130,19 @@ class StatusListController extends Controller
         /** @var Connection $objConn */
         $objConn = $this->get("doctrine.dbal.{$strConnName}_connection");
 
+        $objStmt = $objConn->executeQuery(static::LAST_STATUS_UPDATE_QUERY);
+        $blnUpToDate = $false;
+        if (($arrRow = $objStmt->fetch()))
+        {
+            $intLastUpdateUnix = $arrRow['last_status_update_timestamp'];
+            $intNowUnix = time();
+            if ($intNowUnix - $intLastUpdateUnix <= 60)
+            {
+                // last status update within 1min
+                $blnUpToDate = $true;
+            }
+        }
+
         $objStmt = $objConn->executeQuery($strQuery);
         $arrViewEntries = [];
         while (($arrRow = $objStmt->fetch()))
@@ -182,6 +202,7 @@ class StatusListController extends Controller
         }
 
         return $this->render('@RavuAlHemioIcingaStatus/icingastatus.html.twig', [
+            'isUpToDate' => $blnUpToDate,
             'entries' => $arrViewEntries
         ]);
     }

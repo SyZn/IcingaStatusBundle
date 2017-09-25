@@ -12,6 +12,10 @@ td {
   padding: 0.3em 1em;
   vertical-align: top; }
 
+.error-header-message {
+  background-color: #ff5566;
+  color: #ffffff; }
+
 .icinga-status .entry-output {
   margin-top: 0.5em;
   font-family: "Liberation Mono", "Lucida Console", "Courier", monospace;

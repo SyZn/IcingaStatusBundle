@@ -12,6 +12,10 @@
     "fullOutput=1": show full output instead of only the first line
     -->
 
+    {% if not isUpToDate %}
+    <p class="error-header-message not-up-to-date">Icinga is not up to date! Check that the service is running</p>
+    {% endif %}
+
     <table class="icinga-status">
         {% for entry in entries %}
         <tr class="{{ entry.type }} {{ entry.status }}">

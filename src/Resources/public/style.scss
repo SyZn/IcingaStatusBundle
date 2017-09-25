@@ -41,6 +41,12 @@ td
     vertical-align: top;
 }
 
+.error-header-message
+{
+    background-color: $crit-color;
+    color: #ffffff;
+}
+
 .icinga-status
 {
     .entry-output

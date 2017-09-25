@@ -12,9 +12,14 @@ td {
   padding: 0.3em 1em;
   vertical-align: top; }
 
-.error-header-message {
-  background-color: #ff5566;
-  color: #ffffff; }
+.header-message {
+  padding: 0.3em 1em;
+  border-left-width: 5px;
+  border-left-style: solid; }
+  .header-message .error {
+    background-color: #ff5566;
+    border-left-color: #ff5566;
+    color: #ffffff; }
 
 .icinga-status .entry-output {
   margin-top: 0.5em;

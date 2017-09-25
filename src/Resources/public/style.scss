@@ -41,10 +41,18 @@ td
     vertical-align: top;
 }
 
-.error-header-message
+.header-message
 {
-    background-color: $crit-color;
-    color: #ffffff;
+    padding: 0.3em 1em;
+    border-left-width: $left-border-width;
+    border-left-style: solid;
+
+    .error
+    {
+        background-color: $crit-color;
+        border-left-color: $crit-color;
+        color: #ffffff;
+    }
 }
 
 .icinga-status

@@ -1,6 +1,6 @@
 {
     "name": "ravualhemio/icinga-status-bundle",
-    "type": "symfony-bundle",
+    "type": "contao-bundle",
     "description": "Symfony Icinga status bundle",
     "license": "CC0-1.0+",
     "authors": [
@@ -26,6 +26,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
-        }
+        },
+        "contao-manager-plugin": "RavuAlHemio\\IcingaStatusBundle\\ContaoManager\\Plugin"
     }
 }
